@@ -1,4 +1,10 @@
-import random
+import time
+
+list1=["date_1.in", "date_2.in", "date_3.in", "date_4.in", "date_5.in"]
+
+list2=["Heap1.out", "Heap2.out", "Heap3.out", "Heap4.out", "Heap5.out"]
+
+timpi=[]
 
 def heapify( v, i, n ):
     root=i
@@ -31,9 +37,24 @@ def heapS(v, n):
     v.reverse()
 
 
+for i in range(len(list1)):
+    f=open(list1[i], "r")
+    g=open(list2[i], "w")
+    v=[int(x) for x in f.read().strip().split()]
+    
+    start=time.time()
+    heapS(v, len(v)-1)
+    end=time.time()
+    timpi.append(end-start)
+    for j in range(1,len(v)-1):
+            g.write(str(v[j]))
+            g.write("\n")
+    f.close()
+    g.close()
 
-v=[ random.randint(0,100) for _ in range(15)]
-print(*v)
+g=open("timp_heap.out", "w")
+for i in timpi:
+    g.write(str(i))
+    g.write("\n")
+g.close()
 
-heapS(v, len(v))
-print(*v)
